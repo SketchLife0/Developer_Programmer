@@ -5,11 +5,9 @@
 
 from math import sqrt, pow
 
-lsA = input("Введи X и Y координаты точки А: ").split()
-lsB = input("Введи X и Y координаты точки B: ").split()
-xa = int(lsA[0])
-ya = int(lsA[1])
-xb = int(lsB[0])
-yb = int(lsB[1])
-ab = round(sqrt(pow((xb - xa), 2) + pow((yb - ya), 2)), 2)
+lsA = list(map(int, input("Введи X и Y координаты точки А: ").split()))  # Считывание строки координат и преобразование в список чисел
+lsB = list(map(int, input("Введи X и Y координаты точки B: ").split()))
+xa, ya = lsA[0], lsA[1]  # Выделение Х и Y из координат точки
+xb, yb = lsB[0], lsB[1]
+ab = round(sqrt(pow((xb - xa), 2) + pow((yb - ya), 2)), 2)  # Формула вычисления расстояния координат
 print(f"AB = √(({xb} - {xa})^2 + ({yb} - {ya})^2) = {ab}")
