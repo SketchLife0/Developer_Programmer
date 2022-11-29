@@ -15,6 +15,9 @@ f.close()
 
 start = int(index_ls[0])  # Поиск произведения элементов по считанным индексам
 finish = int(index_ls[1]) + 1
+if finish >= len(work_ls):
+    print("Список слишком мал для подобных идексов")
+    exit()
 result = 1
 for i in range(start, finish):
     result *= work_ls[i]
