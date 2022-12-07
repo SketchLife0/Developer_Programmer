@@ -18,8 +18,6 @@ def game_bot(name1):
             step = int(input(f"Сколько конфет хочет взять {player}? "))
             while step > max_candy:
                 step = int(input(f"Перебор. Максимум {max_candy} конфет за ход. Сколько возьмёшь? "))
-            while step > all_candy:
-                step = int(input(f"Всего конфет осталось {all_candy}. Ты не можешь взять больше. Сколько возьмёшь? "))
         all_candy -= step
         if a:
             candy_player += step
