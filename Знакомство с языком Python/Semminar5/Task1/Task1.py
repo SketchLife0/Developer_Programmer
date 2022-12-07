@@ -13,12 +13,12 @@ def game(name1, name2):
     candy_player2 = 0
     a = bool(randint(0, 1))
     while all_candy > 0:
+        if all_candy < max_candy:
+            max_candy = all_candy
         player = name1 if a else name2
         step = int(input(f"Сколько конфет хочет взять {player}? "))
         while step > max_candy:
             step = int(input(f"Перебор. Максимум {max_candy} конфет за ход. Сколько возьмёшь? "))
-        while step > all_candy:
-            step = int(input(f"Всего конфет осталось {all_candy}. Ты не можешь взять больше. Сколько возьмёшь? "))
         all_candy -= step
         if a:
             candy_player1 += step
@@ -26,7 +26,7 @@ def game(name1, name2):
             candy_player2 += step
         if all_candy == 0:
             return print(f"Конфеты закончились. Поздравляем игрока {player} с победой!!!\n"
-                   f"Все {candy_player1 if a else candy_player1} конфет противника достаются игроку {player}")
+                   f"Все {candy_player1 if not a else candy_player2} конфет противника достаются игроку {player}")
         a = not a
         print(f"Осталось {all_candy} конфет")
 
