@@ -1,4 +1,4 @@
-from Control import Add, Search, Dell, Edition
+from Control import Add, Search, Edition
 from Employee import Info
 
 
@@ -17,7 +17,7 @@ while True:
         print(Edition(index, info))
     elif request == "удалить":
         index = input("Индекс сотрудника: ")
-        print(Dell(index))
+        print(Edition(index, mode=False))
     elif request == "выйти":
         break
     else:

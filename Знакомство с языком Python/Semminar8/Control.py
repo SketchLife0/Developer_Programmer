@@ -18,33 +18,17 @@ def Search(a):
     return "Поиск завершён"
 
 
-def Dell(indx):
+def Edition(indx:str, line='', mode=True):
     Comlete = False
     with open("database.csv", "r", encoding='UTF-8') as f:
         elems = f.readlines()
     for i in range(len(elems)):
         elem = elems[i].split(';')
         if elem[0] == indx:
-            elems.remove(elems[i])
-            Comlete = True
-            break
-    if Comlete:
-        with open("database.csv", "w", encoding='UTF-8') as f:
-            for i in elems:
-                f.write(i)
-            return "Complete"
-    else:
-        return "Bad"
-
-
-def Edition(indx, line):
-    Comlete = False
-    with open("database.csv", "r", encoding='UTF-8') as f:
-        elems = f.readlines()
-    for i in range(len(elems)):
-        elem = elems[i].split(';')
-        if elem[0] == indx:
-            elems[i] = f"{indx};{line}"
+            if mode:
+                elems[i] = f"{indx};{line}"
+            else:
+                elems.remove(elems[i])
             Comlete = True
             break
     if Comlete:
