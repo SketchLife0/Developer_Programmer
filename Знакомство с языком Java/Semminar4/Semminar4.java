@@ -12,7 +12,7 @@ public class Semminar4 {
         int [][] finish = Semminar3.WallGeneration( 2, field[0], field[1]); 
         System.out.printf("%d %d\n", start[0], start[1]);  
         int [][] board = blocking(field, start, wall, finish); 
-        exit(false, board, start);
+        exit(true, board, start);
         for(int i = 0; i < board.length; i++) System.out.println(Arrays.toString(board[i]));
         int shortCut = searchMin(board, finish);
         switch(shortCut){
@@ -28,7 +28,7 @@ public class Semminar4 {
             default: 
                 System.out.printf("Самый короткий путь состоит из %d элементов\n", shortCut);
                 int[] nearestFinish = firstFinish(board, finish);
-                int [][] way = lightWay(board, nearestFinish, shortCut);
+                int [][] way = lightWay(true, board, nearestFinish, shortCut);
                 System.out.println(Arrays.deepToString(way));
                 break;
         }    
@@ -82,23 +82,39 @@ public class Semminar4 {
                 qu.add(new int [] {elem[0]-1, elem[1]}); 
                 field[elem[0]-1][elem[1]] = field[elem[0]][elem[1]] + 1;  
             } 
+            if(diagonal && elem[0]-1 != -1 && elem[1]+1 < field[0].length && field[elem[0]-1][elem[1]+1] == 0){
+                qu.add(new int [] {elem[0]-1, elem[1]+1}); 
+                field[elem[0]-1][elem[1]+1] = field[elem[0]][elem[1]] + 1;
+            }
             if (elem[1]+1 < field[0].length && field[elem[0]][elem[1]+1] == 0){ 
                 qu.add(new int [] {elem[0], elem[1]+1}); 
                 field[elem[0]][elem[1]+1] = field[elem[0]][elem[1]] + 1; 
             }
+            if(diagonal && elem[0]+1 < field[0].length && elem[1]+1 < field[0].length && field[elem[0]+1][elem[1]+1] == 0){
+                qu.add(new int [] {elem[0]+1, elem[1]+1}); 
+                field[elem[0]+1][elem[1]+1] = field[elem[0]][elem[1]] + 1;
+            }
             if (elem[0]+1 < field.length && field[elem[0]+1][elem[1]] == 0){ 
                 qu.add(new int [] {elem[0]+1, elem[1]}); 
                 field[elem[0]+1][elem[1]] = field[elem[0]][elem[1]] + 1;  
-            } 
+            }
+            if(diagonal && elem[0]+1 < field[0].length && elem[1]-1 != -1 && field[elem[0]+1][elem[1]+-1] == 0){
+                qu.add(new int [] {elem[0]+1, elem[1]-1}); 
+                field[elem[0]+1][elem[1]-1] = field[elem[0]][elem[1]] + 1;
+            }
             if (elem[1]-1 != -1 && field[elem[0]][elem[1]-1] == 0){ 
                 qu.add(new int [] {elem[0], elem[1]-1}); 
                 field[elem[0]][elem[1]-1] = field[elem[0]][elem[1]] + 1;  
             } 
+            if(diagonal && elem[0]-1 != -1 && elem[1]-1 != -1 && field[elem[0]-1][elem[1]-1] == 0){
+                qu.add(new int [] {elem[0]-1, elem[1]-1}); 
+                field[elem[0]-1][elem[1]-1] = field[elem[0]][elem[1]] + 1;
+            }
         }while(qu.size() > 0);  
     }
 
 
-    public static int[][] lightWay(int[][] field, int [] finish, int size) {
+    public static int[][] lightWay(boolean diag, int[][] field, int [] finish, int size) {
         int[][] result = new int[size][2];
         result[0][0] = finish[0];
         finish[0]--;
@@ -110,20 +126,40 @@ public class Semminar4 {
                 result[i][1] = finish[1]+1;
                 finish = new int []{finish[0]-1, finish[1]};
             }
+            else if(diag && finish[0]-1 != -1 && finish[1]+1 < field.length && field[finish[0]-1][finish[1]+1] != -1 && field[finish[0]-1][finish[1]+1] < field[finish[0]][finish[1]]){
+                result[i][0] = finish[0];
+                result[i][1] = finish[1]+2;
+                finish = new int []{finish[0]-1, finish[1]+1};
+            }
             else if(finish[1] + 1 < field.length && field[finish[0]][finish[1]+1] != -1 && field[finish[0]][finish[1]+1] < field[finish[0]][finish[1]]){
                 result[i][0] = finish[0]+1;
                 result[i][1] = finish[1]+2;
                 finish = new int []{finish[0], finish[1]+1};
             }
-            else if(finish[0] + 1 < field.length && field[finish[0]+1][finish[1]] != -1 && field[finish[0]+1][finish[1]] < field[finish[0]][finish[1]]){
+            else if(diag && finish[0]+1 < field.length && finish[1]+1 < field.length && field[finish[0]+1][finish[1]+1] != -1 && field[finish[0]+1][finish[1]+1] < field[finish[0]][finish[1]]){
+                result[i][0] = finish[0]+2;
+                result[i][1] = finish[1]+2;
+                finish = new int []{finish[0]+1, finish[1]+1};
+            }
+            else if(finish[0]+1 < field.length && field[finish[0]+1][finish[1]] != -1 && field[finish[0]+1][finish[1]] < field[finish[0]][finish[1]]){
                 result[i][0] = finish[0]+2;
                 result[i][1] = finish[1]+1;
                 finish = new int []{finish[0]+1, finish[1]};
             }
-            else {
-                result[i][0] = finish[0]+1;
+            else if(diag && finish[0]+1 < field.length && finish[1]-1 != -1 && field[finish[0]+1][finish[1]-1] != -1 && field[finish[0]+1][finish[1]-1] < field[finish[0]][finish[1]]){
+                result[i][0] = finish[0]+2;
                 result[i][1] = finish[1];
-                finish = new int []{finish[0], finish[1]-1};
+                finish = new int []{finish[0]+1, finish[1]-1};
+            }
+            else if(finish[0]-1 != -1 && field[finish[0]-1][finish[1]] != -1 && field[finish[0]-1][finish[1]] < field[finish[0]][finish[1]]){
+                result[i][0] = finish[0];
+                result[i][1] = finish[1]+1;
+                finish = new int []{finish[0]-1, finish[1]};
+            }
+            else{
+                result[i][0] = finish[0];
+                result[i][1] = finish[1];
+                finish = new int []{finish[0]-1, finish[1]-1};
             }
         }
         return result;
