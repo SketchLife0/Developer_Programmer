@@ -2,8 +2,13 @@ package units.Base;
 
 /**Волшебник*/
 public class Mag extends BaseHero {
-    super.health = super.health / 100 * 90;
-    private int mana;
+    private int mana = 200;
+    {super.health = health / 100 * 80;}
+
+    @Override
+    public String toString() {
+        return String.format("[heroID: %s, hp: %d, stamina: %d, speed: %d, mp:%d]", heroID, health, endurance, speed, mana);
+    }
 }
     
 

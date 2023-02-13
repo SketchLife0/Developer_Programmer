@@ -4,14 +4,13 @@ package units.Base;
 public class BaseHero {
     protected static String heroID;
     /**hp*/
-    protected static int health = 100;
+    protected int health = 100;
     /**Выносливость*/
-    protected static int endurance = 100;
-    protected static int speed = 300;
+    protected int endurance = 100;
+    protected int speed = 300;
 
-    // @Override
-    public static void ToString() {
-        System.out.printf("[heroID: %s, hp: %d, stamina: %d, speed: %d]", heroID, health, endurance, speed);
-        
+    @Override
+    public String toString() {
+        return String.format("[heroID: %s, hp: %d, stamina: %d, speed: %d]", heroID, health, endurance, speed);
     }
 }
