@@ -1,6 +1,6 @@
 package units.Base;
 
 /**Воин*/
-public class Warrior extends BaseHero{
+public abstract class Warrior extends BaseHero{
     private int power;
 }
