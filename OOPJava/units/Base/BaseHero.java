@@ -37,11 +37,14 @@ public abstract class BaseHero {
         return "Он дохлый";
     }
 
-    /**Функция существует для блокировки перезаписи урона*/
-    public int getDamage(){
-        endurance -= fatigue;
-        if (!alive) return 0;
-        return weapons.get(weapon);
+    /**Функция существует для блокировки перезаписи урона*/ 
+    public int getDamage(){ 
+        if (!alive) return 0; 
+        if (fatigue <= endurance) { 
+            endurance -= fatigue; 
+            return weapons.get(weapon); 
+        } 
+        return 0; 
     }
 
     public int getHP() {
