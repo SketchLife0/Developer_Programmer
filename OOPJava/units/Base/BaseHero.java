@@ -15,10 +15,10 @@ public abstract class BaseHero {
         weapons.put("arbalet", 15);
         weapons.put("rifle", 17);
     }
-    protected String heroID;
+    
     /**hp*/
     protected int maxHealth = 100;
-    protected int health = 100;
+    protected int health = maxHealth;
     /**Специализация*/
     protected String speciality;
     /**Выносливость*/
@@ -29,19 +29,29 @@ public abstract class BaseHero {
     /**Уставание*/
     protected int fatigue = 10;
     private boolean alive = true;
+    private static int id = 1;
+    private int heroID = id;
+
+
+    public BaseHero(){
+        id++;
+    }
 
 
     @Override
     public String toString() {
-        if (alive) return String.format("[heroID: %4s, speciality: %12s, hp: %3d, damage: %2d, stamina: %3d, speed: %3d]", heroID, speciality, health, weapons.get(weapon), endurance, speed);
+        if (alive) return String.format("[heroID: %4d, speciality: %12s, hp: %3d, damage: %2d, stamina: %3d, speed: %3d]", heroID, speciality, health, weapons.get(weapon), endurance, speed);
         return "Он дохлый";
     }
 
     /**Функция существует для блокировки перезаписи урона*/
     public int getDamage(){
-        endurance -= fatigue;
         if (!alive) return 0;
-        return weapons.get(weapon);
+        if (fatigue <= endurance) {
+            endurance -= fatigue;
+            return weapons.get(weapon);
+        }
+        return 0;
     }
 
     public int getHP() {
