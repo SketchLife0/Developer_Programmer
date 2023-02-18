@@ -1,13 +1,22 @@
 package units;
 
-import units.Base.Mag;
+import units.Base.BaseHeroes.Mag;
 
 /**Монах*/
 public class Monk extends Mag{
-    private int manaHeal = 30;
+    /**Сколько маны требует лечение*/private int manaHeal = 30;
     {
         super.speciality = "Монах";
         super.weapon = "hammer";
+    }
+
+
+    public Monk(String name){
+        super.name = name;
+    }
+    
+    public Monk(){
+        super.name = "Безымянный";
     }
 
     public boolean heal() {

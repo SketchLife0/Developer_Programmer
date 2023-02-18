@@ -1,4 +1,4 @@
-package units.Base;
+package units.Base.BaseHeroes;
 
 /**Волшебник*/
 public abstract class Mag extends BaseHero {

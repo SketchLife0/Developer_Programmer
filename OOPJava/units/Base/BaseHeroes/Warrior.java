@@ -1,4 +1,4 @@
-package units.Base;
+package units.Base.BaseHeroes;
 
 /**Воин*/
 public abstract class Warrior extends BaseHero{

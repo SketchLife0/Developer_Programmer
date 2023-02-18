@@ -1,10 +1,12 @@
-package units.Base;
+package units.Base.BaseHeroes;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import units.Base.GameIntarface;
+
 /**Базовые настройки персонажа*/
-public abstract class BaseHero {
+public abstract class BaseHero implements GameIntarface{
     protected Map<String, Integer> weapons = new HashMap();
     {
         weapons.put("fork", 5);
@@ -15,43 +17,55 @@ public abstract class BaseHero {
         weapons.put("arbalet", 15);
         weapons.put("rifle", 17);
     }
-    
-    /**hp*/
-    protected int maxHealth = 100;
-    protected int health = maxHealth;
-    /**Специализация*/
-    protected String speciality;
-    /**Выносливость*/
-    protected int endurance = 100;
-    protected int speed = 300;
     protected String weapon;
+    /**Специализация*/ protected String speciality;
+    protected String name;
+    /**max hp*/ protected int maxHealth = 100;
+    /**hp*/ protected int health = maxHealth;
+    /**Выносливость*/ protected int endurance = 100;
+    protected int speed = 300;
     protected int shield = 0;
-    /**Уставание*/
-    protected int fatigue = 10;
-    private boolean alive = true;
+    /**Уставание*/ protected int fatigue = 10;
+    /**Живой или нет*/ private boolean alive = true;
     private static int id = 1;
     private int heroID = id;
 
-
+    
+    public BaseHero(String name){
+        id++;
+        this.name = name;
+    }
+    
     public BaseHero(){
         id++;
+        this.name = "Безымянный";
+    }
+
+    @Override
+    public void step() {
+        
+    }
+
+
+    @Override
+    public String getInfo() {
+        return String.format("Я %s, и я %s", name, speciality);
     }
 
 
     @Override
     public String toString() {
-        if (alive) return String.format("[heroID: %4d, speciality: %12s, hp: %3d, damage: %2d, stamina: %3d, speed: %3d]", heroID, speciality, health, weapons.get(weapon), endurance, speed);
+        if (alive) return String.format("[heroID: %4d, name: %10s, speciality: %12s, hp: %3d, damage: %2d, stamina: %3d, speed: %3d]", heroID, name, speciality, health, weapons.get(weapon), endurance, speed);
         return "Он дохлый";
     }
 
-    /**Функция существует для блокировки перезаписи урона*/
-    public int getDamage(){
-        if (!alive) return 0;
-        if (fatigue <= endurance) {
-            endurance -= fatigue;
-            return weapons.get(weapon);
-        }
-        return 0;
+    /**Функция существует для блокировки перезаписи урона*/ 
+    public int getDamage(){ 
+        if (!alive || fatigue > endurance) return 0; 
+        else{ 
+            endurance -= fatigue; 
+            return weapons.get(weapon); 
+        } 
     }
 
     public int getHP() {

@@ -1,4 +1,4 @@
-package units.Base;
+package units.Base.BaseHeroes;
 
 /**Дальник*/
 public abstract class Shooter extends BaseHero{
