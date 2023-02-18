@@ -29,27 +29,18 @@ public abstract class BaseHero implements GameIntarface{
     private int heroID = id;
 
     
-    public BaseHero(String name){
-        id++;
-        this.name = name;
-    }
-    
     public BaseHero(){
         id++;
-        this.name = "Безымянный";
     }
 
     @Override
     public void step() {
-        
     }
-
 
     @Override
     public String getInfo() {
         return String.format("Я %s, и я %s", name, speciality);
     }
-
 
     @Override
     public String toString() {

@@ -7,41 +7,37 @@ import java.util.Random;
 /**сама игра*/
 public class Game {
     public static void main(String[] args) {
-        Random rd = new Random();
         int size = 10;
+        Random rd = new Random();
         ArrayList <BaseHero> heroes = new ArrayList<>(size);
         for(int i = 0; i < size; i++){
             int key = rd.nextInt(7);
+            String name = String.valueOf(Names.values()[rd.nextInt(Names.values().length)]);
             switch (key) {
                 case 0:
-                    heroes.add(new Arbalester(String.valueOf(Names.values()[rd.nextInt(Names.values().length)])));
+                    heroes.add(new Arbalester(name));
                     break;
                 case 1:
-                    heroes.add(new BlackMag(String.valueOf(Names.values()[rd.nextInt(Names.values().length)])));
+                    heroes.add(new BlackMag(name));
                     break;
                 case 2:
-                    heroes.add(new Monk(String.valueOf(Names.values()[rd.nextInt(Names.values().length)])));
+                    heroes.add(new Monk(name));
                     break;
                 case 3:
-                    heroes.add(new Raider(String.valueOf(Names.values()[rd.nextInt(Names.values().length)])));
+                    heroes.add(new Raider(name));
                     break;
                 case 4:
-                    heroes.add(new Sniper(String.valueOf(Names.values()[rd.nextInt(Names.values().length)])));
+                    heroes.add(new Sniper(name));
                     break;
                 case 5:
-                    heroes.add(new Spearman(String.valueOf(Names.values()[rd.nextInt(Names.values().length)])));
+                    heroes.add(new Spearman(name));
                     break;
                 default:
                     heroes.add(new Villager(String.valueOf(Names.values()[rd.nextInt(Names.values().length)])));
                     break;
             }
-        }
-        for (BaseHero baseHero : heroes) {
-            System.out.println(baseHero.toString());
-        }
-
-        for (BaseHero baseHero : heroes) {
-            System.out.println(baseHero.getInfo());
+            System.out.println(heroes.get(i));
+            System.out.println(heroes.get(i).getInfo());
         }
         // Arbalester hoodwink = new Arbalester();
         // BlackMag warlock = new BlackMag();
