@@ -1,6 +1,5 @@
 package units;
 
-import units.Base.Names;
 import units.Base.BaseHeroes.Shooter;
 
 /**Арбалетчик*/

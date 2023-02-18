@@ -1,13 +1,11 @@
 package units.Base.BaseHeroes;
 
 import java.util.HashMap;
-import java.util.Map;
-
 import units.Base.GameIntarface;
 
 /**Базовые настройки персонажа*/
 public abstract class BaseHero implements GameIntarface{
-    protected Map<String, Integer> weapons = new HashMap();
+    protected HashMap<String, Integer> weapons = new HashMap<>();
     {
         weapons.put("fork", 5);
         weapons.put("knife", 7);
