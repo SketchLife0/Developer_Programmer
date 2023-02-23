@@ -1,28 +1,30 @@
 package units.Base.BaseHeroes;
 
 import java.util.HashMap;
+import java.util.Iterator;
+
 import units.Base.GameIntarface;
 
 /**Базовые настройки персонажа*/
-public abstract class BaseHero implements GameIntarface{
+public abstract class BaseHero implements GameIntarface, Comparable <BaseHero>, Iterator{
     protected HashMap<String, Integer> weapons = new HashMap<>();
     {
-        weapons.put("fork", 5);
-        weapons.put("knife", 7);
-        weapons.put("spear", 10);
-        weapons.put("hammer", 6);
-        weapons.put("staff", 20);
-        weapons.put("arbalet", 15);
-        weapons.put("rifle", 17);
+        weapons.put("fork", 1);
+        weapons.put("knife", 8);
+        weapons.put("spear", 4);
+        weapons.put("hammer", 12);
+        weapons.put("staff", 17);
+        weapons.put("arbalet", 6);
+        weapons.put("rifle", 12);
     }
     protected String weapon;
     /**Специализация*/ protected String speciality;
     protected String name;
-    /**max hp*/ protected int maxHealth = 100;
+    /**max hp*/ protected int maxHealth = 1;
     /**hp*/ protected int health = maxHealth;
     /**Выносливость*/ protected int endurance = 100;
-    protected int speed = 300;
-    protected int shield = 0;
+    protected int speed = 3;
+    protected int shield = 1;
     /**Уставание*/ protected int fatigue = 10;
     /**Живой или нет*/ private boolean alive = true;
     private static int id = 1;
@@ -48,6 +50,26 @@ public abstract class BaseHero implements GameIntarface{
         return "Он дохлый";
     }
 
+
+    @Override
+    public int compareTo(BaseHero o) {
+        if(this.speed > o.speed) return -1;
+        if(this.speed < o.speed) return 1;
+        return 0;
+    }
+
+    @Override
+    public boolean hasNext() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public Object next() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /**Функция существует для блокировки перезаписи урона*/ 
     public int getDamage(){ 
         if (!alive || fatigue > endurance) return 0; 
@@ -60,6 +82,10 @@ public abstract class BaseHero implements GameIntarface{
     public int getHP() {
         if (!alive) return 0;
         return health;
+    }
+
+    public int getSpeed() {
+        return this.speed;
     }
 
     /**Функция получения урона. damage - урон атакующего*/

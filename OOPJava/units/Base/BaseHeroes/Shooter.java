@@ -3,6 +3,6 @@ package units.Base.BaseHeroes;
 /**Дальник*/
 public abstract class Shooter extends BaseHero{
     /**Боеприпасы*/
-    private int ammunition;
+    protected int ammunition = 16;
     protected int range = 500;
 }

@@ -7,6 +7,8 @@ public class BlackMag extends Mag {
     {
         super.speciality = "Чернокнижник";
         super.weapon = "staff";
+        super.shield = 12;
+        super.speed = 9;
     }
 
 

@@ -7,6 +7,10 @@ public class Arbalester extends Shooter{
     {
         super.speciality = "Стрелок";
         super.weapon = "arbalet";
+        super.shield = 3;
+        super.maxHealth = 10;
+        super.health = 10;
+        super.speed = 4;
     }
     
 

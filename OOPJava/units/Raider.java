@@ -7,6 +7,8 @@ public class Raider extends Warrior {
     {
         super.speciality = "Бандит";
         super.weapon = "knife";
+        super.shield = 3;
+        super.speed = 6;
     }
 
 

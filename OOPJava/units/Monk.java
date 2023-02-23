@@ -8,6 +8,8 @@ public class Monk extends Mag{
     {
         super.speciality = "Монах";
         super.weapon = "hammer";
+        super.shield = 7;
+        super.speed = 5;
     }
 
 
