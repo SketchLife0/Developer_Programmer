@@ -41,40 +41,28 @@ public class Game {
             int command = 0;
             BaseHero a = iter1.next();
             BaseHero b = iter2.next();
+            boolean busy = true;
             do {
-                if (command == 0){
-                    System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
-                    command = a.getSpeed() > b.getSpeed() ? 2 : 1;
-                }
-                else if (command == 1){
-                    if (iter2.hasNext()) {
-                        b = iter2.next();
+                switch (command) {
+                    case 0:
                         System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
                         command = a.getSpeed() > b.getSpeed() ? 2 : 1;
-                    }
-                    else {
-                        System.out.println(a);
-                        command = 0;
-                        while (iter1.hasNext()) {
-                            System.out.println(iter1.next());
+                        break;
+                    default:
+                        if (command == 1 ? iter2.hasNext() : iter1.hasNext()) {
+                            if (command == 1) b = iter2.next();
+                            else a = iter1.next();
+                            System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
+                            command = a.getSpeed() > b.getSpeed() ? 2 : 1;
                         }
-                    }
-                }
-                else{
-                    if (iter1.hasNext()) {
-                        a = iter1.next();
-                        System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
-                        command = a.getSpeed() > b.getSpeed() ? 2 : 1;
-                    }
-                    else{
-                        System.out.println(b);
-                        command = 0;
-                        while (iter2.hasNext()) {
-                            System.out.println(iter2.next());
+                        else {
+                            System.out.println(command == 1 ? a : b);
+                            busy = false;
+                            while (command == 1 ? iter1.hasNext() : iter2.hasNext()) System.out.println(command == 1 ? iter1.next() : iter2.next());
                         }
-                    }
-                }
-            } while (iter1.hasNext() || iter2.hasNext() || command != 0);
+                        break;
+                }    
+            } while (busy);
         }
     }
         // // Демонстрация работы
