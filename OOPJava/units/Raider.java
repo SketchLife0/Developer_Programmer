@@ -12,11 +12,20 @@ public class Raider extends Warrior {
     }
 
 
-    public Raider(String name){
+    public Raider(String name, int x, int y){
         super.name = name;
+        new Raider(x, y);
     }
     
-    public Raider(){
-        super.name = "Безымянный";
+    public Raider(int x, int y){
+        if (super.name == null) super.name = "Безымянный";
+        try {
+            if (x > GetX()) throw new Exception("Ошибка: Выход за пределы");
+            else super.x = x;
+            if (y > GetY()) throw new Exception("Ошибка: Выход за пределы");
+            else super.y = y;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

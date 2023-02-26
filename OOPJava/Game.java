@@ -2,23 +2,24 @@ import units.*;
 import units.Base.BaseHeroes.BaseHero;
 import units.Base.Names;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
 
 /**сама игра*/
 public class Game {
     public static void main(String[] args) {
-        ArrayList <BaseHero> radiant = createTeam(false);
-        ArrayList <BaseHero> dare = createTeam(true);
-        radiant.sort(null);
-        dare.sort(null);
-        System.out.println("Сортированные Силы Света");
-        printTeam(radiant);
-        System.out.println("Сортированные Силы Тьмы");
-        printTeam(dare);  
-        Iterator<BaseHero> iter1 = radiant.iterator();
-        Iterator<BaseHero> iter2 = dare.iterator();
-        System.out.println();
+        // ArrayList <BaseHero> radiant = createTeam(false);
+        // ArrayList <BaseHero> dare = createTeam(true);
+        // radiant.sort(null);
+        // dare.sort(null);
+        // System.out.println("Сортированные Силы Света");
+        // printTeam(radiant);
+        // System.out.println("Сортированные Силы Тьмы");
+        // printTeam(dare);  
+        // Iterator<BaseHero> iter1 = radiant.iterator();
+        // Iterator<BaseHero> iter2 = dare.iterator();
+        // System.out.println();
         // // Вариант через короткую запись но большое количество памяти
 
         // int maxsize = radiant.size() > dare.size() ? radiant.size() : dare.size();
@@ -35,39 +36,43 @@ public class Game {
         
         // Вариант через сложную запись но меньшее количество памяти
 
-        if (radiant.size() == 0) while(iter2.hasNext()) System.out.println(iter2.next());
-        else if (dare.size() == 0) while(iter1.hasNext()) System.out.println(iter1.next());
-        else{
-            int command = 0;
-            BaseHero a = iter1.next();
-            BaseHero b = iter2.next();
-            boolean busy = true;
-            do {
-                switch (command) {
-                    case 0:
-                        System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
-                        command = a.getSpeed() > b.getSpeed() ? 2 : 1;
-                        break;
-                    default:
-                        if (command == 1 ? iter2.hasNext() : iter1.hasNext()) {
-                            if (command == 1) b = iter2.next();
-                            else a = iter1.next();
-                            System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
-                            command = a.getSpeed() > b.getSpeed() ? 2 : 1;
-                        }
-                        else {
-                            System.out.println(command == 1 ? a : b);
-                            busy = false;
-                            while (command == 1 ? iter1.hasNext() : iter2.hasNext()) System.out.println(command == 1 ? iter1.next() : iter2.next());
-                        }
-                        break;
-                }    
-            } while (busy);
-        }
+    //     if (radiant.size() == 0) while(iter2.hasNext()) System.out.println(iter2.next());
+    //     else if (dare.size() == 0) while(iter1.hasNext()) System.out.println(iter1.next());
+    //     else{
+    //         int command = 0;
+    //         BaseHero a = iter1.next();
+    //         BaseHero b = iter2.next();
+    //         boolean busy = true;
+    //         do {
+    //             switch (command) {
+    //                 case 0:
+    //                     System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
+    //                     command = a.getSpeed() > b.getSpeed() ? 2 : 1;
+    //                     break;
+    //                 default:
+    //                     if (command == 1 ? iter2.hasNext() : iter1.hasNext()) {
+    //                         if (command == 1) b = iter2.next();
+    //                         else a = iter1.next();
+    //                         System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
+    //                         command = a.getSpeed() > b.getSpeed() ? 2 : 1;
+    //                     }
+    //                     else {
+    //                         System.out.println(command == 1 ? a : b);
+    //                         busy = false;
+    //                         while (command == 1 ? iter1.hasNext() : iter2.hasNext()) System.out.println(command == 1 ? iter1.next() : iter2.next());
+    //                     }
+    //                     break;
+    //             }    
+    //         } while (busy);
+    //     }
+    Villager creep = new Villager(2, 5);
+    System.out.println(creep.toString());
+    System.out.println(creep.GetX());
+    System.out.println(creep.getPosition());
     }
         // // Демонстрация работы
 
-        // Arbalester hoodwink = new Arbalester();
+        // Arbalester hoodwink = new Arbalester("Вася", 11, 10);
         // BlackMag warlock = new BlackMag();
         // Monk omniknight = new Monk();
         // Raider riki = new Raider();
@@ -96,32 +101,32 @@ public class Game {
 
 
     /**Создаёт команду счогласно указанным параметрам в задаче. dark - отвечает за сторону тьмы*/
-    public static ArrayList <BaseHero> createTeam(boolean dark) {
-        System.out.println(dark ? "Силы Тьмы" : "Силы Света");
-        int size = 10;
-        Random rd = new Random();
-        ArrayList <BaseHero> result = new ArrayList<>(size);
-        for(int i = 0; i < size; i++){
-            int key = rd.nextInt(4);
-            String name = String.valueOf(Names.values()[rd.nextInt(Names.values().length)]);
-            switch (key) {
-                case 0:
-                    result.add(dark ? new Raider(name) : new Spearman(name));
-                    break;
-                case 1:
-                    result.add(dark ? new BlackMag(name) : new Monk(name));
-                    break;
-                case 2:
-                    result.add(dark ? new Sniper(name) : new Arbalester(name));
-                    break;
-                default:
-                    result.add(new Villager(name));
-                    break;
-            }
-            System.out.println(result.get(i));
-        }
-        return result;
-    }
+    // public static ArrayList <BaseHero> createTeam(boolean dark) {
+    //     System.out.println(dark ? "Силы Тьмы" : "Силы Света");
+    //     int size = 10;
+    //     Random rd = new Random();
+    //     ArrayList <BaseHero> result = new ArrayList<>(size);
+    //     for(int i = 0; i < size; i++){
+    //         int key = rd.nextInt(4);
+    //         String name = String.valueOf(Names.values()[rd.nextInt(Names.values().length)]);
+    //         switch (key) {
+    //             case 0:
+    //                 result.add(dark ? new Raider(name) : new Spearman(name));
+    //                 break;
+    //             case 1:
+    //                 result.add(dark ? new BlackMag(name) : new Monk(name));
+    //                 break;
+    //             case 2:
+    //                 // result.add(dark ? new Sniper(name) : new Arbalester(name));
+    //                 break;
+    //             default:
+    //                 result.add(new Villager(name));
+    //                 break;
+    //         }
+    //         System.out.println(result.get(i));
+    //     }
+    //     return result;
+    // }
 
 
     public static void printTeam(ArrayList a) {

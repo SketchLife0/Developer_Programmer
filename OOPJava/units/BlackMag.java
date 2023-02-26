@@ -12,11 +12,20 @@ public class BlackMag extends Mag {
     }
 
 
-    public BlackMag(String name){
+    public BlackMag(String name, int x, int y){
         super.name = name;
+        new BlackMag(x, y);
     }
     
-    public BlackMag(){
-        super.name = "Безымянный";
+    public BlackMag(int x, int y){
+        if (super.name == null) super.name = "Безымянный";
+        try {
+            if (x > GetX()) throw new Exception("Ошибка: Выход за пределы");
+            else super.x = x;
+            if (y > GetY()) throw new Exception("Ошибка: Выход за пределы");
+            else super.y = y;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

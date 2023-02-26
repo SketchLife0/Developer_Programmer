@@ -11,50 +11,21 @@ public class Villager extends BaseHero{
     private int delivery = 1;
 
 
-    public Villager(String name){
+    public Villager(String name, int x, int y){
         super.name = name;
+        new Villager(x, y);
     }
     
-    public Villager(){
-        super.name = "Безымянный";
+    public Villager(int x, int y){
+        if (super.name == null) super.name = "Безымянный";
+        try {
+            if (x > GetX()) throw new Exception("Ошибка: Выход за пределы");
+            else super.x = x;
+            if (y > GetY()) throw new Exception("Ошибка: Выход за пределы");
+            else super.y = y;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 }
 
-
-// if (command != 0){
-//     switch (command) {
-//         case 1:
-//             if(iter2.hasNext()){
-//                 BaseHero b = iter2.next();
-//                 System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
-//                 command = a.getSpeed() > b.getSpeed() ? 2 : 1;
-//                 s = a.getSpeed() > b.getSpeed() ? b.getSpeed() : a.getSpeed();
-//             }
-//             else System.out.println(a);
-//                 break;
-        
-//         case 2:
-//             if(iter1.hasNext()){
-//                 BaseHero a = iter1.next();
-//                 System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
-//                 command = a.getSpeed() > b.getSpeed() ? 2 : 1;
-//                 s = a.getSpeed() > b.getSpeed() ? b.getSpeed() : a.getSpeed();
-//             }
-//             else System.out.println(a);
-//             break;
-
-//         default:
-//             break;
-// }}
-// if(iter1.hasNext()){
-//     BaseHero a = iter1.next();
-//     if(a.getSpeed() < s)
-//     if(iter2.hasNext()){
-//         BaseHero b = iter2.next();
-//         System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
-//         s = a.getSpeed() > b.getSpeed() ? b.getSpeed() : a.getSpeed();
-//     }
-//     else System.out.println(a);
-// }
-// else System.out.println(iter2.next());
-// }

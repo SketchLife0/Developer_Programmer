@@ -13,12 +13,21 @@ public class Monk extends Mag{
     }
 
 
-    public Monk(String name){
+    public Monk(String name, int x, int y){
         super.name = name;
+        new Monk(x, y);
     }
     
-    public Monk(){
-        super.name = "Безымянный";
+    public Monk(int x, int y){
+        if (super.name == null) super.name = "Безымянный";
+        try {
+            if (x > GetX()) throw new Exception("Ошибка: Выход за пределы");
+            else super.x = x;
+            if (y > GetY()) throw new Exception("Ошибка: Выход за пределы");
+            else super.y = y;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public boolean heal() {

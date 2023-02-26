@@ -1,12 +1,14 @@
 package units.Base.BaseHeroes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import units.Base.GameIntarface;
+import units.Base.PlayingField;
 
 /**Базовые настройки персонажа*/
-public abstract class BaseHero implements GameIntarface, Comparable <BaseHero>, Iterator{
+public abstract class BaseHero extends PlayingField implements GameIntarface,  Comparable <BaseHero>, Iterator{
     protected HashMap<String, Integer> weapons = new HashMap<>();
     {
         weapons.put("fork", 1);
@@ -25,6 +27,8 @@ public abstract class BaseHero implements GameIntarface, Comparable <BaseHero>, 
     /**Выносливость*/ protected int endurance = 100;
     protected int speed = 3;
     protected int shield = 1;
+    /**Место по горизонтали*/ protected int x;
+    /**Место по вертикали*/ protected int y;
     /**Уставание*/ protected int fatigue = 10;
     /**Живой или нет*/ private boolean alive = true;
     private static int id = 1;
@@ -86,6 +90,11 @@ public abstract class BaseHero implements GameIntarface, Comparable <BaseHero>, 
 
     public int getSpeed() {
         return this.speed;
+    }
+
+    public ArrayList getPosition(){
+        new ArrayList<>(2)фывпа фывп фывп йЫФВАПА
+        return new ArrayList<>(2);
     }
 
     /**Функция получения урона. damage - урон атакующего*/
