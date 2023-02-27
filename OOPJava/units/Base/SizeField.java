@@ -32,7 +32,6 @@ public abstract class  SizeField {
     public static BaseHero filling(int x, int y, ArrayList<BaseHero> enemy) { 
         int[][]map = createField(getHorizontal(), getVertical());
         map[x][y] = 1;
-        map[x][y] = 1; 
         Queue<int[]> qu = new LinkedList<>(); 
         int [] start = new int [] {x, y}; 
         qu.add(start); 
@@ -72,7 +71,6 @@ public abstract class  SizeField {
             }
         }while(qu.size() > 0);
         return firstEnemy(map, enemy);
-
     }
 
     public static BaseHero firstEnemy(int[][] map, ArrayList<BaseHero> enemy) {
@@ -80,7 +78,6 @@ public abstract class  SizeField {
         BaseHero opponent = enemy.get(0);
         for (int i = 1; i < enemy.size(); i++) {
             int [] elem = new int []{enemy.get(i).getX(), enemy.get(i).getY()}; 
-            int a = map[elem[0]][elem[1]];
             if (map[elem[0]][elem[1]] < min) {
                 min = map[elem[0]][elem[1]];
                 opponent = enemy.get(i);
@@ -90,12 +87,12 @@ public abstract class  SizeField {
     }
 
     private static int [][] createField(int x, int y) {
-        int [][] field = new int [x+2] [y+2];
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field[i].length; j++) {
-                if (i == 0 || j == 0 || i == field.length-1 || j == field[i].length-1) field[i][j] = -1;
+        int [][] result = new int [x+2] [y+2];
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[i].length; j++) {
+                if (i == 0 || j == 0 || i == result.length-1 || j == result[i].length-1) result[i][j] = -1;
             }
         }
-        return field;
+        return result;
     }
 }

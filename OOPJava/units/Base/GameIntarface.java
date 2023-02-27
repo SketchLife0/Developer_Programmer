@@ -8,6 +8,6 @@ import units.Base.BaseHeroes.BaseHero;
  * GameIntarface
  */
 public interface GameIntarface {
-    void step(ArrayList <BaseHero> enemy); 
+    void step(ArrayList <BaseHero> allies, ArrayList <BaseHero> enemy); 
     String getInfo();
 } 

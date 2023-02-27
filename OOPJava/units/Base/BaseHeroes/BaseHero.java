@@ -40,7 +40,7 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
     }
 
     @Override
-    public void step(ArrayList <BaseHero> enemy) {
+    public void step(ArrayList <BaseHero> allies, ArrayList <BaseHero> enemy) {
     }
 
     @Override
@@ -113,7 +113,9 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
 
     /**Функция получения урона. damage - урон атакующего*/
     public void ouch(int damage) {
-        this.health -= damage - this.shield;
+        int hploss = damage - this.shield;
+        if (hploss < 0) hploss = 0;
+        this.health -= hploss;
         if (this.health < 1) alive = false;
     }
 
@@ -127,5 +129,9 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
 
     public void death(boolean swordOfDamocles) {
         if (swordOfDamocles) alive = false;
+        maxHealth = 0;
+        endurance = 0;
+        speed = 0;
+        shield = 0;
     }
 }

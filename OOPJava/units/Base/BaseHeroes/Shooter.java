@@ -2,6 +2,8 @@ package units.Base.BaseHeroes;
 
 import java.util.ArrayList;
 
+import units.Villager;
+
 /**Дальник*/
 public abstract class Shooter extends BaseHero{
     /**Боеприпасы*/
@@ -10,14 +12,23 @@ public abstract class Shooter extends BaseHero{
 
 
     @Override
-    public void step(ArrayList <BaseHero> enemy) {
+    //*При равноудалённости противников бьёт того кто был создан раньше*/
+    public void step(ArrayList <BaseHero> allies, ArrayList <BaseHero> enemy) {
         if (super.health < 1 || ammunition < 1) System.out.println("Неудачный ход");
         else{
             filling(getX(), getY(), enemy).ouch(getDamage());
+            if (! searchVillager(allies)) ammunition --;
         }
     }
 
-    private void searchEnemy(ArrayList <BaseHero> enemy){
-        
+    public boolean searchVillager(ArrayList <BaseHero> allies){
+        boolean result = false;
+        for (BaseHero baseHero : allies) {
+            if(baseHero instanceof Villager) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 }

@@ -14,9 +14,9 @@ public class Game {
         PlayingField field = new PlayingField();
         ArrayList <BaseHero> radiant = createTeam(field, false);
         ArrayList <BaseHero> dare = createTeam(field, true);
-        Arbalester hoodwink = new Arbalester("Вася", 2, 5);
+        Arbalester hoodwink = new Arbalester("Вася", 5, 9);
         field.showField();
-        hoodwink.step(dare);
+        hoodwink.step(radiant, dare);
         printTeam(dare);
 
 
@@ -132,8 +132,6 @@ public class Game {
                     result.add(dark ? new Villager(name, f.getHorizontal(), position) : new Villager(name, 1, position));
                     break;
             }
-            // result.get(i).setPoint(result.get(i).getID(), result.get(i).getX(), result.get(i).getY());;
-            // a.setPoint(a.getID(), a.getX(), a.getY());
             position++;
             System.out.println(result.get(i));
         }
