@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import units.Base.GameIntarface;
-import units.Base.PlayingField;
+import units.Base.SizeField;
 
 /**Базовые настройки персонажа*/
-public abstract class BaseHero extends PlayingField implements GameIntarface,  Comparable <BaseHero>, Iterator{
+public abstract class BaseHero extends SizeField implements GameIntarface,  Comparable <BaseHero>, Iterator{
     protected HashMap<String, Integer> weapons = new HashMap<>();
     {
         weapons.put("fork", 1);
@@ -40,7 +40,7 @@ public abstract class BaseHero extends PlayingField implements GameIntarface,  C
     }
 
     @Override
-    public void step() {
+    public void step(ArrayList <BaseHero> enemy) {
     }
 
     @Override
@@ -92,9 +92,23 @@ public abstract class BaseHero extends PlayingField implements GameIntarface,  C
         return this.speed;
     }
 
-    public ArrayList getPosition(){
-        new ArrayList<>(2)фывпа фывп фывп йЫФВАПА
-        return new ArrayList<>(2);
+    public int getID(){
+        return this.heroID;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
+    public ArrayList<Integer> getPosition(){
+        ArrayList<Integer> a = new ArrayList<>(2);
+        a.add(x);
+        a.add(y);
+        return a;
     }
 
     /**Функция получения урона. damage - урон атакующего*/

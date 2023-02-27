@@ -1,14 +1,14 @@
 package units.Base;
 
-public class PlayingField {
-    /**Горизонталь*/ private static int x = 10;
-    /**Вертикаль*/ private static int y = 10; 
+public class PlayingField extends SizeField{
+    public void showField(){
 
-    public static int GetX() {
-        return x;
-    }
-
-    public static int GetY() {
-        return y;
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field[i].length; j++) {
+                if (j == field[i].length - 1) System.out.printf("%2d\n", field[i][j]);
+                else System.out.printf("%2d ", field[i][j]);
+            }
+        }
+        
     }
 }

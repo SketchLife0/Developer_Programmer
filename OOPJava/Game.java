@@ -1,6 +1,8 @@
 import units.*;
 import units.Base.BaseHeroes.BaseHero;
 import units.Base.Names;
+import units.Base.PlayingField;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -9,8 +11,16 @@ import java.util.Random;
 /**сама игра*/
 public class Game {
     public static void main(String[] args) {
-        // ArrayList <BaseHero> radiant = createTeam(false);
-        // ArrayList <BaseHero> dare = createTeam(true);
+        PlayingField field = new PlayingField();
+        ArrayList <BaseHero> radiant = createTeam(field, false);
+        ArrayList <BaseHero> dare = createTeam(field, true);
+        Arbalester hoodwink = new Arbalester("Вася", 2, 5);
+        field.showField();
+        hoodwink.step(dare);
+        printTeam(dare);
+
+
+
         // radiant.sort(null);
         // dare.sort(null);
         // System.out.println("Сортированные Силы Света");
@@ -65,10 +75,8 @@ public class Game {
     //             }    
     //         } while (busy);
     //     }
-    Villager creep = new Villager(2, 5);
-    System.out.println(creep.toString());
-    System.out.println(creep.GetX());
-    System.out.println(creep.getPosition());
+    
+
     }
         // // Демонстрация работы
 
@@ -101,32 +109,36 @@ public class Game {
 
 
     /**Создаёт команду счогласно указанным параметрам в задаче. dark - отвечает за сторону тьмы*/
-    // public static ArrayList <BaseHero> createTeam(boolean dark) {
-    //     System.out.println(dark ? "Силы Тьмы" : "Силы Света");
-    //     int size = 10;
-    //     Random rd = new Random();
-    //     ArrayList <BaseHero> result = new ArrayList<>(size);
-    //     for(int i = 0; i < size; i++){
-    //         int key = rd.nextInt(4);
-    //         String name = String.valueOf(Names.values()[rd.nextInt(Names.values().length)]);
-    //         switch (key) {
-    //             case 0:
-    //                 result.add(dark ? new Raider(name) : new Spearman(name));
-    //                 break;
-    //             case 1:
-    //                 result.add(dark ? new BlackMag(name) : new Monk(name));
-    //                 break;
-    //             case 2:
-    //                 // result.add(dark ? new Sniper(name) : new Arbalester(name));
-    //                 break;
-    //             default:
-    //                 result.add(new Villager(name));
-    //                 break;
-    //         }
-    //         System.out.println(result.get(i));
-    //     }
-    //     return result;
-    // }
+    public static ArrayList <BaseHero> createTeam(PlayingField f, boolean dark) {
+        System.out.println(dark ? "Силы Тьмы" : "Силы Света");
+        int size = 10;
+        Random rd = new Random();
+        ArrayList <BaseHero> result = new ArrayList<>(size);
+        int position = 1;
+        for(int i = 0; i < size; i++){
+            int key = rd.nextInt(4);
+            String name = String.valueOf(Names.values()[rd.nextInt(Names.values().length)]);
+            switch (key) {
+                case 0:
+                    result.add(dark ? new Raider(name, f.getHorizontal(), position) : new Spearman(name, 1, position));
+                    break;
+                case 1:
+                    result.add(dark ? new BlackMag(name, f.getHorizontal(), position) : new Monk(name, 1, position));
+                    break;
+                case 2:
+                    result.add(dark ? new Sniper(name, f.getHorizontal(), position) : new Arbalester(name, 1, position));
+                    break;
+                default:
+                    result.add(dark ? new Villager(name, f.getHorizontal(), position) : new Villager(name, 1, position));
+                    break;
+            }
+            // result.get(i).setPoint(result.get(i).getID(), result.get(i).getX(), result.get(i).getY());;
+            // a.setPoint(a.getID(), a.getX(), a.getY());
+            position++;
+            System.out.println(result.get(i));
+        }
+        return result;
+    }
 
 
     public static void printTeam(ArrayList a) {
@@ -134,4 +146,6 @@ public class Game {
             System.out.println(object);
         }
     }
+
+
 }

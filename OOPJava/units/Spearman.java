@@ -14,16 +14,33 @@ public class Spearman extends Warrior{
 
     public Spearman(String name, int x, int y){
         super.name = name;
-        new Spearman(x, y);
+        try {
+            if (x > getHorizontal()) throw new Exception("Ошибка: X Выход за пределы");
+            else {
+                super.x = x;
+                if (y > getVertical()) throw new Exception("Ошибка: Y Выход за пределы");
+                else {
+                    super.y = y;
+                    setPoint(getID(), x, y);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
     
     public Spearman(int x, int y){
-        if (super.name == null) super.name = "Безымянный";
+        super.name = "Безымянный";
         try {
-            if (x > GetX()) throw new Exception("Ошибка: Выход за пределы");
-            else super.x = x;
-            if (y > GetY()) throw new Exception("Ошибка: Выход за пределы");
-            else super.y = y;
+            if (x > getHorizontal()) throw new Exception("Ошибка: X Выход за пределы");
+            else {
+                super.x = x;
+                if (y > getVertical()) throw new Exception("Ошибка: Y Выход за пределы");
+                else {
+                    super.y = y;
+                    setPoint(getID(), x, y);
+                }
+            }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
