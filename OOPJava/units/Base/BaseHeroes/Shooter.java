@@ -16,19 +16,22 @@ public abstract class Shooter extends BaseHero{
     public void step(ArrayList <BaseHero> allies, ArrayList <BaseHero> enemy) {
         if (super.health < 1 || ammunition < 1) System.out.println("Неудачный ход");
         else{
-            filling(getX(), getY(), enemy).ouch(getDamage());
-            if (! searchVillager(allies)) ammunition --;
+            BaseHero a = filling(getX(), getY(), enemy);
+            a.ouch(getDamage(a.getShield()));
+            if (!searchVillager(allies)) ammunition --;
         }
     }
 
     public boolean searchVillager(ArrayList <BaseHero> allies){
-        boolean result = false;
         for (BaseHero baseHero : allies) {
-            if(baseHero instanceof Villager) {
-                result = true;
-                break;
+            if (baseHero instanceof Villager) {
+                Villager farmer = (Villager) baseHero;
+                if (!farmer.getBusy()) {
+                    farmer.occupation();
+                    return true;
+                }
             }
         }
-        return result;
+        return false;
     }
 }

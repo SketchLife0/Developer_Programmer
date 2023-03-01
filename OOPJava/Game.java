@@ -14,11 +14,10 @@ public class Game {
         PlayingField field = new PlayingField();
         ArrayList <BaseHero> radiant = createTeam(field, false);
         ArrayList <BaseHero> dare = createTeam(field, true);
-        Arbalester hoodwink = new Arbalester("Вася", 5, 9);
+        Arbalester hoodwink = new Arbalester(5, 9);
         field.showField();
         hoodwink.step(radiant, dare);
         printTeam(dare);
-
 
 
         // radiant.sort(null);

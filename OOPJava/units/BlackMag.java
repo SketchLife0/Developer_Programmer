@@ -9,6 +9,7 @@ public class BlackMag extends Mag {
         super.weapon = "staff";
         super.shield = 12;
         super.speed = 9;
+        super.damage = -5;
     }
 
 
@@ -30,19 +31,6 @@ public class BlackMag extends Mag {
     }
     
     public BlackMag(int x, int y){
-        super.name = "Безымянный";
-        try {
-            if (x > getHorizontal()) throw new Exception("Ошибка: X Выход за пределы");
-            else {
-                super.x = x;
-                if (y > getVertical()) throw new Exception("Ошибка: Y Выход за пределы");
-                else {
-                    super.y = y;
-                    setPoint(getID(), x, y);
-                }
-            }
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+        this("Безымянный", x, y);
     }
 }
