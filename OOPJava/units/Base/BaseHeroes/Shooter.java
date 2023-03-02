@@ -10,6 +10,16 @@ public abstract class Shooter extends BaseHero{
     protected int ammunition = 16;
     protected int range = 500;
 
+    protected Shooter(String name, int x, int y){
+        super(name, x, y);
+        System.out.println("Вызван стрелок2");
+    }
+
+    protected Shooter(int x, int y){
+        super(x, y);
+        System.out.println("Вызван стрелок1");
+    }
+
 
     @Override
     //*При равноудалённости противников бьёт того кто был создан раньше*/

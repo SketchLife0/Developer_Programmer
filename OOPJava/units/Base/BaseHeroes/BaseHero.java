@@ -39,8 +39,28 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
     private int heroID = id;
 
     
-    public BaseHero(){
+    public BaseHero(String name, int x, int y){
+        this.name = name;
+        try {
+            if (x > getHorizontal()) throw new Exception("Ошибка: X Выход за пределы");
+            else {
+                this.x = x;
+                if (y > getVertical()) throw new Exception("Ошибка: Y Выход за пределы");
+                else {
+                    this.y = y;
+                    setPoint(getID(), x, y);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
         id++;
+        System.out.println("Вызван герой2");
+    }
+
+    public BaseHero(int x, int y){
+        this("Безымянный", x, y);
+        System.out.println("Вызван герой1");
     }
 
     @Override

@@ -11,6 +11,13 @@ public abstract class Mag extends BaseHero {
         super.health = 30;
     }
 
+    protected Mag(String name, int x, int y){
+        super(name, x, y);
+    }
+
+    protected Mag(int x, int y){
+        super(x, y);
+    }
 
     @Override
     public void step(ArrayList<BaseHero> allies, ArrayList<BaseHero> enemy) {
