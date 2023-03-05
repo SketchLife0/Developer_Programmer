@@ -19,7 +19,11 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
         weapons.put("arbalet", 6);
         weapons.put("rifle", 12);
     }
-    protected String weapon;
+    protected int damage = 1;
+    protected int smallDamage = damage;
+    protected int hardDamage = damage;
+    protected String weapon = "fork";
+    protected int atack = weapons.get(weapon);
     /**Специализация*/ protected String speciality;
     protected String name;
     /**max hp*/ protected int maxHealth = 1;
@@ -30,13 +34,33 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
     /**Место по горизонтали*/ protected int x;
     /**Место по вертикали*/ protected int y;
     /**Уставание*/ protected int fatigue = 10;
-    /**Живой или нет*/ private boolean alive = true;
+    /**Живой или нет*/ protected boolean alive = true;
     private static int id = 1;
     private int heroID = id;
 
     
-    public BaseHero(){
+    public BaseHero(String name, int x, int y){
+        this.name = name;
+        try {
+            if (x > getHorizontal()) throw new Exception("Ошибка: X Выход за пределы");
+            else {
+                this.x = x;
+                if (y > getVertical()) throw new Exception("Ошибка: Y Выход за пределы");
+                else {
+                    this.y = y;
+                    setPoint(getID(), x, y);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
         id++;
+        System.out.println("Вызван герой2");
+    }
+
+    public BaseHero(int x, int y){
+        this("Безымянный", x, y);
+        System.out.println("Вызван герой1");
     }
 
     @Override
@@ -74,18 +98,39 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
         return null;
     }
 
-    /**Функция существует для блокировки перезаписи урона*/ 
-    public int getDamage(){ 
+    /**По врагу*/ 
+    public int getDamage(int shieldEnemy){ 
         if (!alive || fatigue > endurance) return 0; 
         else{ 
-            endurance -= fatigue; 
-            return weapons.get(weapon); 
-        } 
+            endurance -= fatigue;
+            if(atack > shieldEnemy) return hardDamage;
+            else if(atack == shieldEnemy) return damage;
+            else return smallDamage; 
+        }
+    }
+
+
+    /**По союзнику*/
+    public int getDamage() {
+        if (!alive || fatigue > endurance) return 0;
+        else{
+            endurance -= fatigue;
+            return damage;
+        }
+    }
+
+
+    public int getShield() {
+        return shield;
     }
 
     public int getHP() {
-        if (!alive) return 0;
         return health;
+    }
+
+    public int getMaxHP(){
+        return maxHealth;
+
     }
 
     public int getSpeed() {
@@ -113,10 +158,9 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
 
     /**Функция получения урона. damage - урон атакующего*/
     public void ouch(int damage) {
-        int hploss = damage - this.shield;
-        if (hploss < 0) hploss = 0;
-        this.health -= hploss;
-        if (this.health < 1) alive = false;
+        health -= damage;
+        if(health > maxHealth) health = maxHealth;
+        if(health < 1) death(true);
     }
 
     public void healing(boolean manaBurn) {
@@ -128,10 +172,14 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
     }
 
     public void death(boolean swordOfDamocles) {
-        if (swordOfDamocles) alive = false;
-        maxHealth = 0;
-        endurance = 0;
-        speed = 0;
-        shield = 0;
+        if (swordOfDamocles) {
+            damage = 0;
+            alive = false;
+            maxHealth = 0;
+            health = 0;
+            endurance = 0;
+            speed = 0;
+            shield = 0;
+        }
     }
 }
