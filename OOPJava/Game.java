@@ -4,65 +4,32 @@ import units.Base.Names;
 import units.Base.PlayingField;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Random;
+import java.util.Scanner;
 
 /**сама игра*/
 public class Game {
+    public static PlayingField field = new PlayingField();
+    public static ArrayList <BaseHero> radiant = createTeam(field, false);
+    public static ArrayList <BaseHero> dare = createTeam(field, true);
+    public static ArrayList <BaseHero> allTeam = new ArrayList<>(radiant.size() + dare.size());
     public static void main(String[] args) {
-        PlayingField field = new PlayingField();
-        ArrayList <BaseHero> radiant = createTeam(field, false);
-        ArrayList <BaseHero> dare = createTeam(field, true);
+        Scanner user_input = new Scanner(System.in);
+        System.out.print("Press Enter to begin.");
+        user_input.nextLine();
         field.showField();
-        radiant.sort(null);
-        dare.sort(null);
-        Iterator<BaseHero> iter1 = radiant.iterator();
-        Iterator<BaseHero> iter2 = dare.iterator();
-        // // Вариант через короткую запись но большое количество памяти
-
-        // int maxsize = radiant.size() > dare.size() ? radiant.size() : dare.size();
-        // ArrayList <BaseHero> queue = new ArrayList<>(radiant.size() + dare.size());
-        // for (int i = 0; i < maxsize; i++) {
-        //     if(iter1.hasNext()) queue.add(iter1.next());
-        //     if(iter2.hasNext()) queue.add(iter2.next());
-        // }
-        // queue.sort(null);
-        // printTeam(queue);
-        
-        
-        // Вариант через сложную запись но меньшее количество памяти
-
-        // if (radiant.size() == 0) while(iter2.hasNext()) System.out.println(iter2.next());
-        // else if (dare.size() == 0) while(iter1.hasNext()) System.out.println(iter1.next());
-        // else{
-        //     int command = 0;
-        //     BaseHero a = iter1.next();
-        //     BaseHero b = iter2.next();
-        //     boolean busy = true;
-        //     do {
-        //         switch (command) {
-        //             case 0:
-        //                 System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
-        //                 command = a.getSpeed() > b.getSpeed() ? 2 : 1;
-        //                 break;
-        //             default:
-        //                 if (command == 1 ? iter2.hasNext() : iter1.hasNext()) {
-        //                     if (command == 1) b = iter2.next();
-        //                     else a = iter1.next();
-        //                     System.out.println(a.getSpeed() > b.getSpeed() ? a : b);
-        //                     command = a.getSpeed() > b.getSpeed() ? 2 : 1;
-        //                 }
-        //                 else {
-        //                     System.out.println(command == 1 ? a : b);
-        //                     busy = false;
-        //                     while (command == 1 ? iter1.hasNext() : iter2.hasNext()) System.out.println(command == 1 ? iter1.next() : iter2.next());
-        //                 }
-        //                 break;
-        //         }    
-        //     } while (busy);
-        // }
-    
+        allTeam.addAll(radiant);
+        allTeam.addAll(dare);
+        allTeam.sort(null);
+        printTeam(allTeam);
+        while (true){
+            View.view();
+            user_input.nextLine();
+            for (BaseHero human: allTeam) {
+                if (radiant.contains(human)) human.step(radiant, dare);
+                else human.step(dare, radiant);
+            }
+        }
 
     }
 

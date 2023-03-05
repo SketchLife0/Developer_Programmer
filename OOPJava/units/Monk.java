@@ -11,6 +11,8 @@ public class Monk extends Mag{
         super.shield = 7;
         super.speed = 5;
         super.damage = -4;
+        super.smallDamage = -4;
+        super.hardDamage = -4;
     }
 
 

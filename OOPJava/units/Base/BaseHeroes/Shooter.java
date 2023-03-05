@@ -12,23 +12,22 @@ public abstract class Shooter extends BaseHero{
 
     protected Shooter(String name, int x, int y){
         super(name, x, y);
-        System.out.println("Вызван стрелок2");
     }
 
     protected Shooter(int x, int y){
         super(x, y);
-        System.out.println("Вызван стрелок1");
     }
 
 
     @Override
     //*При равноудалённости противников бьёт того кто был создан раньше*/
     public void step(ArrayList <BaseHero> allies, ArrayList <BaseHero> enemy) {
-        if (super.health < 1 || ammunition < 1) System.out.println("Неудачный ход");
+        if (!super.alive || ammunition < 1) System.out.println(getID() + "Неудачный ход");
         else{
             BaseHero a = filling(getX(), getY(), enemy);
             a.ouch(getDamage(a.getShield()));
             if (!searchVillager(allies)) ammunition --;
+            System.out.println(getID() + "бьёт" + a.getID());
         }
     }
 

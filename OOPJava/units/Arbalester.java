@@ -13,16 +13,15 @@ public class Arbalester extends Shooter{
         super.speed = 4;
         super.damage = 3;
         super.smallDamage = 2;
+        super.hardDamage = 3;
     }
     
 
     public Arbalester(String name, int x, int y){
         super(name, x, y);
-        System.out.println("Вызван арбалетчик2");
     }
     
     public Arbalester(int x, int y){
         super(x,y);
-        System.out.println("Вызван арбалетчик1");
     }
 }

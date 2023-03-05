@@ -78,7 +78,7 @@ public abstract class  SizeField {
         BaseHero opponent = enemy.get(0);
         for (int i = 1; i < enemy.size(); i++) {
             int [] elem = new int []{enemy.get(i).getX(), enemy.get(i).getY()}; 
-            if (map[elem[0]][elem[1]] < min) {
+            if (map[elem[0]][elem[1]] < min && enemy.get(i).getMaxHP() < 1) {
                 min = map[elem[0]][elem[1]];
                 opponent = enemy.get(i);
             }

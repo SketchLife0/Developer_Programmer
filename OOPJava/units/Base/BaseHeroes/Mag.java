@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public abstract class Mag extends BaseHero {
     protected int mana = 200;
     {
-        super.fatigue = 15;
         super.maxHealth = 30;
         super.health = 30;
     }

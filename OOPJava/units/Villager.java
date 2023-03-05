@@ -9,8 +9,11 @@ public class Villager extends BaseHero{
     {
         super.speciality = "Селюк";
         super.weapon = "fork";
+        super.damage = 1;
+        super.smallDamage = 1;
+        super.hardDamage = 1;
     }
-    boolean busy = false;
+    private boolean busy = false;
     private int delivery = 1;
 
 
