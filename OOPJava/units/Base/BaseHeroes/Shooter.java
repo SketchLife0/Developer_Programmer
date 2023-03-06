@@ -12,12 +12,10 @@ public abstract class Shooter extends BaseHero{
 
     protected Shooter(String name, int x, int y){
         super(name, x, y);
-        System.out.println("Вызван стрелок2");
     }
 
     protected Shooter(int x, int y){
         super(x, y);
-        System.out.println("Вызван стрелок1");
     }
 
 

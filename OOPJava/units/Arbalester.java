@@ -18,11 +18,9 @@ public class Arbalester extends Shooter{
 
     public Arbalester(String name, int x, int y){
         super(name, x, y);
-        System.out.println("Вызван арбалетчик2");
     }
     
     public Arbalester(int x, int y){
         super(x,y);
-        System.out.println("Вызван арбалетчик1");
     }
 }

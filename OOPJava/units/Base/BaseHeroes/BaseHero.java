@@ -55,12 +55,10 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
             System.err.println(e.getMessage());
         }
         id++;
-        System.out.println("Вызван герой2");
     }
 
     public BaseHero(int x, int y){
         this("Безымянный", x, y);
-        System.out.println("Вызван герой1");
     }
 
     @Override
