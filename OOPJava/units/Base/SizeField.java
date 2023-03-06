@@ -1,7 +1,6 @@
 package units.Base;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -76,13 +75,23 @@ public abstract class  SizeField {
     public static BaseHero firstEnemy(int[][] map, ArrayList<BaseHero> enemy) {
         int min = map[enemy.get(0).getX()][enemy.get(0).getY()];
         BaseHero opponent = enemy.get(0);
-        for (int i = 1; i < enemy.size(); i++) {
-            int [] elem = new int []{enemy.get(i).getX(), enemy.get(i).getY()}; 
-            if (map[elem[0]][elem[1]] < min) {
-                min = map[elem[0]][elem[1]];
-                opponent = enemy.get(i);
+        boolean trueSearch = false;
+        for (BaseHero elem : enemy) {
+            if (!(elem.getMaxHP() < 1)) {
+                opponent = elem;
+                trueSearch = true;
             }
         }
+        if(trueSearch){
+            for (int i = 1; i < enemy.size(); i++) {
+                int [] elem = new int []{enemy.get(i).getX(), enemy.get(i).getY()}; 
+                if (map[elem[0]][elem[1]] < min ) {
+                    min = map[elem[0]][elem[1]];
+                    opponent = enemy.get(i);
+                }
+            }
+        }
+        else throw new NullPointerException("Игра окончена. Противники мертвы");
         return opponent;
     }
 

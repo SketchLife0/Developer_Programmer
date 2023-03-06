@@ -13,6 +13,7 @@ public class Arbalester extends Shooter{
         super.speed = 4;
         super.damage = 3;
         super.smallDamage = 2;
+        super.hardDamage = 3;
     }
     
 

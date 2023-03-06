@@ -22,11 +22,11 @@ public abstract class Shooter extends BaseHero{
     @Override
     //*При равноудалённости противников бьёт того кто был создан раньше*/
     public void step(ArrayList <BaseHero> allies, ArrayList <BaseHero> enemy) {
-        if (super.health < 1 || ammunition < 1) System.out.println("Неудачный ход");
-        else{
+        if (super.alive && ammunition > 0){
             BaseHero a = filling(getX(), getY(), enemy);
             a.ouch(getDamage(a.getShield()));
             if (!searchVillager(allies)) ammunition --;
+            System.out.println(getID() + " бьёт " + a.getID());
         }
     }
 

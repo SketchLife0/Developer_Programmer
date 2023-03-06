@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public abstract class Mag extends BaseHero {
     protected int mana = 200;
     {
-        super.fatigue = 15;
         super.maxHealth = 30;
         super.health = 30;
     }
@@ -25,7 +24,7 @@ public abstract class Mag extends BaseHero {
             double minPercent = 100.0;
             BaseHero hero = allies.get(0);
             boolean initialized = false;
-            for (BaseHero baseHero : enemy) {
+            for (BaseHero baseHero : allies) {
                 double percent = (double) baseHero.getHP() / ((double) baseHero.getMaxHP() / 100.0);
                 if(percent < minPercent) {
                     minPercent = percent;
@@ -33,7 +32,10 @@ public abstract class Mag extends BaseHero {
                     if (!initialized) initialized = true;
                 }
             }
-            if (initialized) hero.ouch(getDamage());
+            if (initialized) {
+                hero.ouch(getDamage());
+                System.out.printf("%d хилит %d\n", getID(), hero.getID());
+            }
         }
     }
 }

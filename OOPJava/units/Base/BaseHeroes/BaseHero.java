@@ -2,13 +2,11 @@ package units.Base.BaseHeroes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-
 import units.Base.GameIntarface;
 import units.Base.SizeField;
 
 /**Базовые настройки персонажа*/
-public abstract class BaseHero extends SizeField implements GameIntarface,  Comparable <BaseHero>, Iterator{
+public abstract class BaseHero extends SizeField implements GameIntarface,  Comparable <BaseHero>{
     protected HashMap<String, Integer> weapons = new HashMap<>();
     {
         weapons.put("fork", 1);
@@ -20,20 +18,18 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
         weapons.put("rifle", 12);
     }
     protected int damage = 1;
-    protected int smallDamage = damage;
-    protected int hardDamage = damage;
+    protected int smallDamage;
+    protected int hardDamage;
     protected String weapon = "fork";
     protected int atack = weapons.get(weapon);
     /**Специализация*/ protected String speciality;
     protected String name;
     /**max hp*/ protected int maxHealth = 1;
     /**hp*/ protected int health = maxHealth;
-    /**Выносливость*/ protected int endurance = 100;
     protected int speed = 3;
     protected int shield = 1;
     /**Место по горизонтали*/ protected int x;
     /**Место по вертикали*/ protected int y;
-    /**Уставание*/ protected int fatigue = 10;
     /**Живой или нет*/ protected boolean alive = true;
     private static int id = 1;
     private int heroID = id;
@@ -58,7 +54,7 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
     }
 
     public BaseHero(int x, int y){
-        this("Безымянный", x, y);
+        this("Никто", x, y);
     }
 
     @Override
@@ -72,10 +68,9 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
 
     @Override
     public String toString() {
-        if (alive) return String.format("[heroID: %4d, name: %10s, speciality: %12s, hp: %3d, damage: %2d, stamina: %3d, speed: %3d]", heroID, name, speciality, health, weapons.get(weapon), endurance, speed);
+        if (alive) return String.format("[ID: %2d, name: %5s, Job: %7s, hp: %3d, maxdg:%2d, speed: %2d]", heroID, name, speciality, health, hardDamage, speed);
         return "Он дохлый";
     }
-
 
     @Override
     public int compareTo(BaseHero o) {
@@ -84,39 +79,17 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
         return 0;
     }
 
-    @Override
-    public boolean hasNext() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public Object next() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     /**По врагу*/ 
     public int getDamage(int shieldEnemy){ 
-        if (!alive || fatigue > endurance) return 0; 
-        else{ 
-            endurance -= fatigue;
-            if(atack > shieldEnemy) return hardDamage;
-            else if(atack == shieldEnemy) return damage;
-            else return smallDamage; 
+        if(atack > shieldEnemy) return hardDamage;
+        else if(atack == shieldEnemy) return damage;
+        else return smallDamage; 
         }
-    }
-
 
     /**По союзнику*/
     public int getDamage() {
-        if (!alive || fatigue > endurance) return 0;
-        else{
-            endurance -= fatigue;
-            return damage;
-        }
+        return damage;
     }
-
 
     public int getShield() {
         return shield;
@@ -171,11 +144,12 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
 
     public void death(boolean swordOfDamocles) {
         if (swordOfDamocles) {
-            damage = 0;
             alive = false;
+            damage = 0;
+            smallDamage = 0;
+            hardDamage = 0;
             maxHealth = 0;
             health = 0;
-            endurance = 0;
             speed = 0;
             shield = 0;
         }
