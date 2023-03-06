@@ -48,7 +48,7 @@ public class View {
         System.out.print(AnsiColors.ANSI_RED + "Step:" + step + AnsiColors.ANSI_RESET);
         step++;
         Game.allTeam.forEach((v) -> l[0] = Math.max(l[0], v.toString().length()));
-        System.out.print("_".repeat(l[0]*2) + "\n");
+        System.out.print("_".repeat(l[0]*2+41) + "\n");
         System.out.print(top10 + "    ");
         System.out.print(AnsiColors.ANSI_BLUE + "Blue side" + AnsiColors.ANSI_RESET);
         System.out.print(" ".repeat(l[0]-9));
