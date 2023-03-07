@@ -58,10 +58,6 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
     }
 
     @Override
-    public void step(ArrayList <BaseHero> allies, ArrayList <BaseHero> enemy) {
-    }
-
-    @Override
     public String getInfo() {
         return String.format("Я %s, и я %s", name, speciality);
     }

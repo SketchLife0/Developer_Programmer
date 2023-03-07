@@ -28,7 +28,7 @@ public abstract class  SizeField {
         }
     }
 
-    public static BaseHero filling(int x, int y, ArrayList<BaseHero> enemy) { 
+    public static BaseHero filling(int x, int y, ArrayList<BaseHero> enemy, boolean diagonal) { 
         int[][]map = createField(getHorizontal(), getVertical());
         map[x][y] = 1;
         Queue<int[]> qu = new LinkedList<>(); 
@@ -40,7 +40,7 @@ public abstract class  SizeField {
                 qu.add(new int [] {elem[0]-1, elem[1]}); 
                 map[elem[0]-1][elem[1]] = map[elem[0]][elem[1]] + 1;  
             } 
-            if(elem[0]-1 != -1 && elem[1]+1 < map[0].length && map[elem[0]-1][elem[1]+1] == 0){
+            if(diagonal && elem[0]-1 != -1 && elem[1]+1 < map[0].length && map[elem[0]-1][elem[1]+1] == 0){
                 qu.add(new int [] {elem[0]-1, elem[1]+1}); 
                 map[elem[0]-1][elem[1]+1] = map[elem[0]][elem[1]] + 1;
             }
@@ -48,7 +48,7 @@ public abstract class  SizeField {
                 qu.add(new int [] {elem[0], elem[1]+1}); 
                 map[elem[0]][elem[1]+1] = map[elem[0]][elem[1]] + 1; 
             }
-            if(elem[0]+1 < map[0].length && elem[1]+1 < map[0].length && map[elem[0]+1][elem[1]+1] == 0){
+            if(diagonal && elem[0]+1 < map[0].length && elem[1]+1 < map[0].length && map[elem[0]+1][elem[1]+1] == 0){
                 qu.add(new int [] {elem[0]+1, elem[1]+1}); 
                 map[elem[0]+1][elem[1]+1] = map[elem[0]][elem[1]] + 1;
             }
@@ -56,7 +56,7 @@ public abstract class  SizeField {
                 qu.add(new int [] {elem[0]+1, elem[1]}); 
                 map[elem[0]+1][elem[1]] = map[elem[0]][elem[1]] + 1;  
             }
-            if(elem[0]+1 < map[0].length && elem[1]-1 != -1 && map[elem[0]+1][elem[1]+-1] == 0){
+            if(diagonal && elem[0]+1 < map[0].length && elem[1]-1 != -1 && map[elem[0]+1][elem[1]+-1] == 0){
                 qu.add(new int [] {elem[0]+1, elem[1]-1}); 
                 map[elem[0]+1][elem[1]-1] = map[elem[0]][elem[1]] + 1;
             }
@@ -64,7 +64,7 @@ public abstract class  SizeField {
                 qu.add(new int [] {elem[0], elem[1]-1}); 
                 map[elem[0]][elem[1]-1] = map[elem[0]][elem[1]] + 1;  
             } 
-            if(elem[0]-1 != -1 && elem[1]-1 != -1 && map[elem[0]-1][elem[1]-1] == 0){
+            if(diagonal && elem[0]-1 != -1 && elem[1]-1 != -1 && map[elem[0]-1][elem[1]-1] == 0){
                 qu.add(new int [] {elem[0]-1, elem[1]-1}); 
                 map[elem[0]-1][elem[1]-1] = map[elem[0]][elem[1]] + 1;
             }

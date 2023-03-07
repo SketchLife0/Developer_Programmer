@@ -8,6 +8,5 @@ public class PlayingField extends SizeField{
                 else System.out.printf("%2d ", field[i][j]);
             }
         }
-        
     }
 }

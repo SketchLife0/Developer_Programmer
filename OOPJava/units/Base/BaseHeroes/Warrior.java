@@ -1,5 +1,7 @@
 package units.Base.BaseHeroes;
 
+import java.util.ArrayList;
+
 /**Воин*/
 public abstract class Warrior extends BaseHero{
     {
@@ -13,5 +15,14 @@ public abstract class Warrior extends BaseHero{
 
     protected Warrior(int x, int y){
         super(x, y);
+    }
+
+    @Override
+    public void step(ArrayList<BaseHero> allies, ArrayList<BaseHero> enemy) {
+        if (super.alive){
+            BaseHero a = filling(getX(), getY(), enemy, false);
+            a.ouch(getDamage(a.getShield()));
+            System.out.println(getID() + " бьёт " + a.getID());
+        }
     }
 }
