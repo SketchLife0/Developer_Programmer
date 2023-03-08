@@ -1,6 +1,7 @@
 package units.Base.BaseHeroes;
 
 import java.util.ArrayList;
+import units.Base.PlayingField;
 
 /**Волшебник*/
 public abstract class Mag extends BaseHero {
@@ -19,7 +20,7 @@ public abstract class Mag extends BaseHero {
     }
 
     @Override
-    public void step(ArrayList<BaseHero> allies, ArrayList<BaseHero> enemy) {
+    public void step(ArrayList<BaseHero> allies, ArrayList<BaseHero> enemy, PlayingField map) {
         if (alive) {
             double minPercent = 100.0;
             BaseHero hero = allies.get(0);

@@ -27,8 +27,8 @@ public class Game {
                 View.view();
                 user_input.nextLine();
                 for (BaseHero human: allTeam) {
-                    if (radiant.contains(human)) human.step(radiant, dare);
-                    else human.step(dare, radiant);
+                    if (radiant.contains(human)) human.step(radiant, dare, field);
+                    else human.step(dare, radiant, field);
                 }
             } catch (Exception e) {
                 System.err.println(e.getMessage());

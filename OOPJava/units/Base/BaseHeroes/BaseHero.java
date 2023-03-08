@@ -1,5 +1,6 @@
 package units.Base.BaseHeroes;
 
+import java.nio.charset.CodingErrorAction;
 import java.util.ArrayList;
 import java.util.HashMap;
 import units.Base.GameIntarface;
@@ -44,7 +45,7 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
                 if (y > getVertical()) throw new Exception("Ошибка: Y Выход за пределы");
                 else {
                     this.y = y;
-                    setPoint(getID(), x, y);
+                    setPoint(getID(), x, y, false);
                 }
             }
         } catch (Exception e) {
@@ -148,6 +149,15 @@ public abstract class BaseHero extends SizeField implements GameIntarface,  Comp
             health = 0;
             speed = 0;
             shield = 0;
+            System.out.printf("%d убит\n", getID());
         }
+    }
+
+    public void stepX(int step) {
+        this.x += step;
+    }
+
+    public void stepY(int step) {
+        this.y += step;
     }
 }

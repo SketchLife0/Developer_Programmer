@@ -19,9 +19,9 @@ public abstract class  SizeField {
         return y;
     }
 
-    public void setPoint(int id, int x, int y){
+    public void setPoint(int id, int x, int y, boolean command){
         try {
-            if (field[x][y] == 0) field[x][y] = id;
+            if (command || field[x][y] == 0) field[x][y] = id;
             else throw new Exception("Ошибка: место занято");    
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -80,14 +80,17 @@ public abstract class  SizeField {
             if (!(elem.getMaxHP() < 1)) {
                 opponent = elem;
                 trueSearch = true;
+                break;
             }
         }
         if(trueSearch){
-            for (int i = 1; i < enemy.size(); i++) {
-                int [] elem = new int []{enemy.get(i).getX(), enemy.get(i).getY()}; 
-                if (map[elem[0]][elem[1]] < min ) {
-                    min = map[elem[0]][elem[1]];
-                    opponent = enemy.get(i);
+            for (int i = 0; i < enemy.size(); i++) {
+                if (!(enemy.get(i).getMaxHP() < 1)){
+                    int [] elem = new int []{enemy.get(i).getX(), enemy.get(i).getY()}; 
+                    if (map[elem[0]][elem[1]] < min ) {
+                        min = map[elem[0]][elem[1]];
+                        opponent = enemy.get(i);
+                    }
                 }
             }
         }
@@ -103,5 +106,9 @@ public abstract class  SizeField {
             }
         }
         return result;
+    }
+
+    public boolean freePoint(int x, int y){
+        return field[x][y] == 0 ? true : false;
     }
 }

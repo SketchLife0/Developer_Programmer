@@ -2,6 +2,7 @@ package units;
 
 import java.util.ArrayList;
 
+import units.Base.PlayingField;
 import units.Base.BaseHeroes.BaseHero;
 
 /**Селюк*/
@@ -30,7 +31,7 @@ public class Villager extends BaseHero{
     }
 
     @Override
-    public void step(ArrayList<BaseHero> allies, ArrayList<BaseHero> enemy) {
+    public void step(ArrayList<BaseHero> allies, ArrayList<BaseHero> enemy, PlayingField map) {
         if (alive) busy = false;
     }
 

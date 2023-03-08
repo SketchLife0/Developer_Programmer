@@ -1,8 +1,8 @@
 package units.Base.BaseHeroes;
 
 import java.util.ArrayList;
-
 import units.Villager;
+import units.Base.PlayingField;
 
 /**Дальник*/
 public abstract class Shooter extends BaseHero{
@@ -21,12 +21,12 @@ public abstract class Shooter extends BaseHero{
 
     @Override
     //*При равноудалённости противников бьёт того кто был создан раньше*/
-    public void step(ArrayList <BaseHero> allies, ArrayList <BaseHero> enemy) {
+    public void step(ArrayList <BaseHero> allies, ArrayList <BaseHero> enemy,  PlayingField map) {
         if (super.alive && ammunition > 0){
             BaseHero a = filling(getX(), getY(), enemy, true);
+            System.out.println(getID() + " бьёт " + a.getID());
             a.ouch(getDamage(a.getShield()));
             if (!searchVillager(allies)) ammunition --;
-            System.out.println(getID() + " бьёт " + a.getID());
         }
     }
 
