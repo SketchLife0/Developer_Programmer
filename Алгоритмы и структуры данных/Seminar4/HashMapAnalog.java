@@ -9,18 +9,39 @@ public class HashMapAnalog <K, V>{
      * @param value - Значение элемента
      * @return boolean значение успеха функции
      */
-    public static boolean put(Integer key , Integer value) {
-        
-        return
+    public boolean put(K key , V value) {
+        Node<K, V> input = new Node<>(key, value);
+        Integer hash16 = input.key.hashCode() % 16;
+        if (nodes[hash16] != null) {
+            Node<K, V> currentNode = nodes[hash16];
+            while (currentNode != null) {
+                if (currentNode.key == key) {
+                    currentNode.value = value;
+                    return true;
+                }
+                currentNode = currentNode.nextNode;
+            }
+            input.nextNode = nodes[hash16];
+        }
+        nodes[hash16] = input;
+        return true;
     }
 
     /**
      * Получить значение соответствующее ключу
      * @param key - HashCode элемента для поиска
-     * @return Integer Значение найденного элемента
+     * @return Значение найденного элемента
      */
-    public static Integer get(Integer key){
-        return 
+    public V get(Integer key){
+        Integer index = key.hashCode() % 16;
+        Node<K, V> currentNode = nodes[index];
+        while (currentNode != null) {
+            if (currentNode.key == key) {
+                return currentNode.value;
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return null;
     }
 
     /**
@@ -28,8 +49,24 @@ public class HashMapAnalog <K, V>{
      * @param key - HashCode элемента для удаления
      * @return boolean значение успеха функции
      */
-    public static boolean remove(Integer key){
-        return 
+    public boolean remove(Integer key){
+        Integer index = key.hashCode() % 16;
+        Node<K, V> currentNode = nodes[index];
+        Node<K, V> previousNode = null;
+        while (currentNode != null) {
+            if (currentNode.key.equals(key)) {
+                if (previousNode == null)
+                    nodes[index] = currentNode.nextNode;
+                else if (currentNode.nextNode == null)
+                    previousNode.nextNode = null;
+                else
+                    previousNode.nextNode = currentNode.nextNode;
+                return true;
+            }
+            previousNode = currentNode;
+            currentNode = currentNode.nextNode;
+        }
+        return false;
     }
 
     /**
@@ -38,16 +75,33 @@ public class HashMapAnalog <K, V>{
      * @param v - Новое значение элемента
      * @return boolean значение успеха функции
      */
-    public static boolean replays(Integer key, Integer v) {
-        return
+    public boolean replays(Integer key, V v) {
+        Integer index = key.hashCode() % 16;
+        Node<K, V> currentNode = nodes[index];
+        while (currentNode != null) {
+            if (currentNode.key == key) {
+                currentNode.value = v;
+                return true;
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return false;
     }
 
     /**
      * Вывод количество элементов в функции
      * @return Integer размер массива
      */
-    public static Integer size(){
-        return
+    public int size(){
+        int result = 0;
+        for (int i = 0; i < 16; i++){
+            Node<K, V> currentNode = nodes[i];
+            while (currentNode != null){
+                result ++;
+                currentNode = currentNode.nextNode;
+            }
+        }
+        return result;
     }
 
     /**
@@ -55,8 +109,16 @@ public class HashMapAnalog <K, V>{
      * @param key - необходимый ключ для поиска
      * @return boolean значение успеха функции
      */
-    public static boolean containsKey(Integer key){
-        return 
+    public boolean containsKey(Integer key){
+        Integer index = key.hashCode() % 16;
+        Node<K, V> currentNode = nodes[index];
+        while (currentNode != null) {
+            if (currentNode.key == key) {
+                return true;
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return false;
     }
 
     /**
@@ -64,7 +126,13 @@ public class HashMapAnalog <K, V>{
      * @param v - необходимое значение для поиска
      * @return boolean значение успеха функции
      */
-    public static boolean containsValue(Integer v){
-        return
+    public boolean containsValue(Integer v){
+        for (int i = 0; i < 16; i++){
+            Node<K, V> currentNode = nodes[i];
+            if (currentNode != null && currentNode.value == v){
+                return true;
+            }
+        }
+        return false;
     }
 }
