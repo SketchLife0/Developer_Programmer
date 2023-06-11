@@ -14,6 +14,7 @@ public class Task4 {
         while (true) {
             System.out.print("Введите строку: ");
             String a = sc.nextLine();
+            sc.close();
             try {
                 if (a.equals("")) throw new Exception();
             } catch (Exception e) {
