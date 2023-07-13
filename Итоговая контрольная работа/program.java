@@ -23,16 +23,28 @@ public class program {
             String inpuString = sc.nextLine();
             switch (inpuString) {
                 case "1":
+                    add();
+                    System.out.print("Выберите вид животного:\n" +
+                                        "1 - Кот\n" +
+                                        "2 - Собака\n" +
+                                        "3 - Хомяк\n" +
+                                        "4 - Лошадь\n" +
+                                        "5 - Верблюд\n" +
+                                        "6 - Осёл\n" +
+                                        "7 - Иное\n");
+                    String vid = sc.nextLine();
+                    do {
+                        
                     System.out.print("Введите имя животного: ");
                     String a = sc.nextLine();
                     if(isOnlyLetters(a)){
                         //В принципе будь это реальный проект то можно было бы сделать и удаление команд
                         System.out.print("Введите команды через запятую: ");
                     }
-                    else
+                    } while (isOnlyLetters(a));
                     break;
                 case "2":
-                    
+                    System.out.println(searchComands(sc));
                     break;
                 case "3":
                     
@@ -46,7 +58,21 @@ public class program {
         } while (true);
     }
     
-    public void add (String n, String b, ArrayList c, String s){
+    public void add (String n, String b, ArrayList c){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Выберите вид животного:\n" +
+                        "1 - Кот\n" +
+                        "2 - Собака\n" +
+                        "3 - Хомяк\n" +
+                        "4 - Лошадь\n" +
+                        "5 - Верблюд\n" +
+                        "6 - Осёл\n" +
+                        "7 - Иное\n");
+        String s = sc.nextLine();
+        if(isNumeric(s)){
+            int number = Integer.parseInt(s);
+            if(number > 0 && number < 7)
+        }
         switch(s){
             case "1":
                 Cat cat = new Cat(n, c, b);
@@ -78,10 +104,40 @@ public class program {
                 animals.add(donkey);
                 pack_animals.add(donkey);
                 break;
+            default: 
+                System.out.println("Такое животное отсутсвует. Обратитесь к системному администратору");
         }
     }
 
+    public static String searchComands(Scanner sc){
+        String b;
+        String result = "";
+        do {
+            System.out.print("Введите id животного из общего списка: ");
+            b = sc.nextLine();
+        } while (isNumeric(b));
+        int id = Integer.parseInt(b);
+        for (int i = 0; i < animals.size(); i++) {
+            if (animals.get(i).getID() == id){
+                for (Animal elem : animals.get(i).getComands()) {
+                    result += elem + " ";
+                }
+                return result;
+            }
+        }
+        return "Элемент не найден";
+    }
+    
     public static boolean isOnlyLetters(String str) {
         return str.matches("[a-zA-Z]+");
+    }
+
+    public static boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

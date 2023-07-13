@@ -6,7 +6,7 @@ public abstract class Animal {
     private static int id;
     private int animalId = id;
     private String name;
-    private ArrayList comands;
+    private ArrayList<Animal> comands;
     private String birthday;
     private String specie;
 
@@ -21,5 +21,13 @@ public abstract class Animal {
         comands = c;
         birthday = b;
         specie = s;
+    }
+
+    public int getID(){
+        return animalId;
+    }
+
+    public ArrayList<Animal> getComands(){
+        return comands;
     }
 }
