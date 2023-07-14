@@ -6,7 +6,7 @@ import animals.basic_animal.Pets;
 
 public class Dog extends Pets{
 
-    public Dog(String n, ArrayList c, String b) {
+    public Dog(String n, ArrayList<String> c, String b) {
         super(n, c, b, "Dog");
     }
     

@@ -6,7 +6,7 @@ public abstract class Animal {
     private static int id;
     private int animalId = id;
     private String name;
-    private ArrayList<Animal> comands;
+    private ArrayList<String> comands;
     private String birthday;
     private String specie;
 
@@ -16,7 +16,7 @@ public abstract class Animal {
      * @param b - Birthday
      * @param s - Specie
     */
-    public Animal(String n, ArrayList c, String b, String s){
+    public Animal(String n, ArrayList<String> c, String b, String s){
         name = n;
         comands = c;
         birthday = b;
@@ -27,7 +27,29 @@ public abstract class Animal {
         return animalId;
     }
 
-    public ArrayList<Animal> getComands(){
+    public ArrayList<String> getComands(){
         return comands;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getBirthday(){
+        return birthday;
+    }
+
+    public String getSpecie(){
+        return specie;
+    }
+
+    public String getInfo(){
+        return id + " " + specie + " " + name + " " + birthday;
+    }
+
+    public void addComands(ArrayList<String> com){
+        for (String string : com) {
+            comands.add(string);
+        }
     }
 }

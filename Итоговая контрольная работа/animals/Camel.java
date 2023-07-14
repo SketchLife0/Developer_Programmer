@@ -6,7 +6,7 @@ import animals.basic_animal.Pack_animal;
 
 public class Camel extends Pack_animal{
 
-    public Camel(String n, ArrayList c, String b) {
+    public Camel(String n, ArrayList<String> c, String b) {
         super(n, c, b, "Camel");
     }
     
